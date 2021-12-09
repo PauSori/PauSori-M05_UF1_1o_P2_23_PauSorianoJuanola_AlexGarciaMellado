@@ -44,6 +44,11 @@ void FantasmasAlex::Draw()
 
 }
 
+void FantasmasAlex::PowerUpPicked()
+{
+	powerup_countdown = TimeManager::getInstance().time + 15;
+}
+
 FantasmasAlex::ENEMY_STATE FantasmasAlex::Update(Map* _map, COORD _player)
 {
 	RandomDirection();
@@ -73,8 +78,24 @@ FantasmasAlex::ENEMY_STATE FantasmasAlex::Update(Map* _map, COORD _player)
 
 	ENEMY_STATE state = ENEMY_STATE::ENEMY_NONE;
 	if (position.X == _player.X && position.Y == _player.Y) {
-		position = spawn;
-		state = ENEMY_STATE::ENEMY_KILLED;
+		//powerup_countdown += TimeManager::getInstance().deltaTime;
+		if (powerup_countdown <= TimeManager::getInstance().time)
+		{
+			state = ENEMY_STATE::ENEMY_DEAD;
+		}
+		else
+		{
+			position = spawn;
+			state = ENEMY_STATE::ENEMY_KILLED;
+		}
+	}
+	if (powerup_countdown <= TimeManager::getInstance().time)
+	{
+		foreground = foreground_attack;
+	}
+	else
+	{
+		foreground = foreground_powerUp;
 	}
 	return state;
 }

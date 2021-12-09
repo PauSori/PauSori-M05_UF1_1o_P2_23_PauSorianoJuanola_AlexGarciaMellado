@@ -6,10 +6,6 @@ TimeManager& TimeManager::getInstance()
 	return timeManager;
 }
 
-static TimeManager& getInstance() {
-	static TimeManager timeManager;
-	return timeManager;
-}
 void TimeManager::NextFrame()
 {
 	frameCount++;

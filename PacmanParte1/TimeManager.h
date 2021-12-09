@@ -8,9 +8,7 @@ public :
 	float time;
 	float deltaTime;
 
-	static TimeManager& getInstance() {
-		
-	}
+	static TimeManager& getInstance();
 
 	void NextFrame();
 };
